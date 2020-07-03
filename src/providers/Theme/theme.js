@@ -293,6 +293,17 @@ const dashboard = {
   cards,
   styles,
 };
-const theme = { dashboard };
+
+const overrides = {
+  MuiLink: {
+    underlineHover: {
+      textDecoration: 'none',
+      '&:hover': {
+        textDecoration: 'none',
+      },
+    },
+  },
+};
+const theme = { dashboard, overrides };
 // @ts-ignore
 export default createMuiTheme(theme);
