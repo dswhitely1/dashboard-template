@@ -29,6 +29,7 @@ function SideBarLinks(props) {
   });
   const collapseItemText = cx({
     [classes.collapseItemText]: true,
+    [classes.collapseItemTextLinkView]: true,
     [classes.collapseItemTextMini]: miniActiveState && miniActive,
   });
 
@@ -206,6 +207,7 @@ SideBarLinks.propTypes = {
     caretActive: PropTypes.string,
     collapseList: PropTypes.string,
     collapseItemLink: PropTypes.string,
+    collapseItemTextLinkView: PropTypes.string,
   }),
   miniActive: PropTypes.bool,
   miniActiveState: PropTypes.bool,

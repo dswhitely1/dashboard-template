@@ -293,7 +293,6 @@ const useStyles = makeStyles(theme => ({
   collapseItemText: {
     color: 'inherit',
     ...theme.dashboard.font,
-    lineHeight: '30px',
     margin: 0,
     position: 'relative',
     transform: 'translateX(0px)',
@@ -301,6 +300,9 @@ const useStyles = makeStyles(theme => ({
     whiteSpace: 'nowrap',
     display: 'block',
     transition: 'transform 300ms ease 0s, opacity 300ms ease 0s',
+  },
+  collapseItemTextLinkView: {
+    lineHeight: '30px',
   },
   collapseItemTextMini: {
     transform: 'translate3d(-25px,0,0)',
@@ -587,6 +589,7 @@ function SideBar(props) {
       </Hidden>
       <Hidden smDown implementation="css">
         <Drawer
+          variant="permanent"
           anchor="left"
           open
           classes={{

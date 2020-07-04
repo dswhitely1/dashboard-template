@@ -5,6 +5,7 @@ import routes from '../routes';
 import AuthNavBar from '../components/Navbars/AuthNavbar';
 import Footer from '../components/Footer/Footer';
 import firework from '../assets/images/fireworks.jpg';
+import { useRouterUtils } from '../providers/Router/routerUtils';
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -55,6 +56,7 @@ const useStyles = makeStyles(theme => ({
 
 function AuthLayout(props) {
   const { ...rest } = props;
+  const [getRoutes, getActiveRoute] = useRouterUtils();
   const [brandText, setBrandText] = useState('');
   const wrapper = createRef();
   const classes = useStyles();
@@ -63,37 +65,6 @@ function AuthLayout(props) {
     document.body.style.overflow = 'unset';
     return () => {};
   });
-
-  const getRoutes = checkRoutes =>
-    checkRoutes.map(
-      ({ collapse, views, layout, path, component: Component }, key) => {
-        if (collapse) {
-          return getRoutes(views);
-        }
-        if (layout === '/auth') {
-          return (
-            <Route path={`${layout}${path}`} component={Component} key={key} />
-          );
-        }
-        return null;
-      }
-    );
-
-  const getActiveRoute = useCallback(checkRoutes => {
-    const activeRoute = 'Default Brand Text';
-    for (const route of checkRoutes) {
-      const { collapse, views, layout, path, name } = route;
-      if (collapse) {
-        const collapseActiveRoute = getActiveRoute(views);
-        if (collapseActiveRoute !== activeRoute) {
-          return collapseActiveRoute;
-        }
-      } else if (window.location.href.indexOf(`${layout}${path}`) > -1) {
-        return name;
-      }
-    }
-    return activeRoute;
-  }, []);
 
   useEffect(() => {
     const updatedName = getActiveRoute(routes);
@@ -106,7 +77,7 @@ function AuthLayout(props) {
       <div className={classes.wrapper} ref={wrapper}>
         <div className={classes.fullPage}>
           <Switch>
-            {getRoutes(routes)}
+            {getRoutes(routes, '/auth')}
             <Redirect from="/auth" to="/auth/login" />
           </Switch>
           <Footer white />
