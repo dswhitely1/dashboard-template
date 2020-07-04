@@ -306,6 +306,4 @@ function AdminNavBarLinks() {
   );
 }
 
-AdminNavBarLinks.propTypes = {};
-
 export default AdminNavBarLinks;
