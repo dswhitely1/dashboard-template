@@ -88,6 +88,7 @@ function Footer(props) {
   });
   const blockClasses = cx({
     [classes.block]: true,
+    [classes.a]: true,
     [classes.whiteColor]: white,
   });
   return (
@@ -96,7 +97,7 @@ function Footer(props) {
         <div className={classes.left}>
           <List className={classes.list}>
             {footerLinks.map(({ title, link }, key) => (
-              <ListItem className={classes.inlineBlock}>
+              <ListItem className={classes.inlineBlock} key={key}>
                 <Link
                   href={link}
                   target="_blank"
